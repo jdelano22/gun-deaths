@@ -1,0 +1,110 @@
+---
+title: "Appendix A: Data Cleaning and Preparation"
+author: "Jimmy DeLano and Casey DeLano"
+date: "12/4/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+library(testit)
+library(corrplot)
+```
+
+```{r}
+cdc_data <- read.csv("~/stat346/final-project/cdc_data.csv")
+census <- read.csv("~/stat346/final-project/gundata.csv")
+colnames(census)[colnames(census) == 'STCOU'] <- "County.Code"
+laws <- read.csv("~/stat346/final-project/laws.csv")
+
+merge1 <- merge(x = census, y = cdc_data, by = "County.Code", all.y = TRUE)
+
+merge2 <- merge(x = merge1, y = laws, by = "State", all.x = TRUE)
+merge2$Federal.Govt.Expenditure.Per.Person = merge2$Federal.Govt.Expenditure / merge2$Population
+
+master <- subset(merge2, select = -c(State, County.Code, Areaname, 
+                                     Deaths, Total.Persons, Federal.Govt.Expenditure))
+
+# divide crime numbers by population
+master[,4:12] = (master[,4:12] / master$Population) * 1000
+
+names(master)[4:12] <- c("Violent.Crimes.Per.1000", "Murders.And.Manslaughters.Per.1000", "Rapes.Per.1000", 
+                         "Robberies.Per.1000", "Aggravated.Assaults.Per.1000", "Property.Crimes.Per.1000", 
+                         "Burglaries.Per.1000", "Larceny.Thefts.Per.1000", "Motor.Vehicle.Thefts.Per.1000")
+
+```
+
+```{r}
+df_pearson_cor_values <-cor(master[4:12],method = "pearson")
+corrplot(df_pearson_cor_values, method="circle", type = "lower")
+```
+
+Rapes doesn't have as much collinearity with the other crime predictors. Let's take a look at it:
+
+```{r}
+# feel like something could be wrong here --> huge influence point
+plot(master$Rapes.Per.1000, master$Crude.Rate)
+```
+
+```{r}
+plot(Crude.Rate~Rapes.Per.1000, data = master[master$Rapes.Per.1000 < 2, ])
+```
+
+We found that Navajo County, AZ had way too many rapes per 1000. More research found that this data was actually be incorrect so the row will be dropped from the dataset. See the final paper for more details (attribution link).
+
+```{r}
+master <- master[!(master$County == 'Navajo County, AZ'),]
+summary(master)
+```
+
+From the summary, we notice lots of minimums with 0. Turns out there are 4 rows with missing values. Anchorage Borough, AK had 0% republican vote, so the row was dropped. Avg.Land.Value had 13 missing values, so we'll drop this column completely. The Bronx County, NY, New York County, NY, & Queens County, NY were missing all columns of crime data and federal govt expenditure so they were dropped. We'll drop District of Columbia, DC because it has no Gun.Law.Rank.2010.
+
+```{r}
+master <- master[!(master$County %in% c('Anchorage Borough, AK', 'Bronx County, NY', 
+                                        'New York County, NY', 'Queens County, NY', 'District of Columbia, DC')), ]
+master <- subset(master, select = -c(Avg.Land.Value))
+summary(master)
+```
+
+Nice. It looks like we've removed all missing values. Let's dive into the crime statistics a little more.
+
+```{r}
+df_pearson_cor_values2 <-cor(master[3:11],method = "pearson")
+corrplot(df_pearson_cor_values2, method="circle", type = "lower")
+```
+
+We notice that violent crimes = murders + rapes + robberies + aggravated assaults, so we'll drop the individual columns after showing that violent crimes = sum of other crimes.
+
+```{r}
+suppressMessages(suppressWarnings(attach(master)))
+assert(Violent.Crimes.Per.1000-(Murders.And.Manslaughters.Per.1000+Rapes.Per.1000+
+                                  Robberies.Per.1000+Aggravated.Assaults.Per.1000)<.00001)
+
+# now lets look at the other crime statistics
+df_pearson_cor_values3 <-cor(master[8:11],method = "pearson")
+corrplot(df_pearson_cor_values3, method="circle", type = "lower")
+```
+
+Because there's a high level of collinearity between the rest of the crime statistics, we'll combine them into a non.violent.cimes.per.1000 variable.
+
+```{r}
+master$Non.Violent.Crimes.Per.1000 = Property.Crimes.Per.1000 + Burglaries.Per.1000 + 
+  Larceny.Thefts.Per.1000 + Motor.Vehicle.Thefts.Per.1000
+
+# remove columns
+final.df <- subset(master, select = -c(Property.Crimes.Per.1000, Burglaries.Per.1000, Larceny.Thefts.Per.1000, 
+                                        Motor.Vehicle.Thefts.Per.1000, Murders.And.Manslaughters.Per.1000, 
+                                        Rapes.Per.1000, Robberies.Per.1000, Aggravated.Assaults.Per.1000))
+
+## create categories for republican vote
+# 0%-40% = Democrat, 40%-60% = Swing, 60%-100% = Republican
+final.df$Voter.Group.2008 <- cut(final.df$Republican.Vote.Pct, 
+                   breaks=c(-Inf, 40, 60, Inf), 
+                   labels=c("Democrat","Swing","Republican"))
+
+final.df <- subset(final.df, select = -c(Republican.Vote.Pct))
+
+write.csv(final.df, file = "~/stat346/final-project/final.csv", row.names = FALSE)
+```
+
+
+

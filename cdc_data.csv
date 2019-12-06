@@ -1,0 +1,320 @@
+﻿State,County,County Code,Deaths,Population,Crude Rate
+AL,"Baldwin County, AL",1003,29,182265,15.91
+AL,"Jefferson County, AL",1073,128,658466,19.44
+AL,"Madison County, AL",1089,59,334811,17.62
+AL,"Mobile County, AL",1097,73,412992,17.68
+AL,"Montgomery County, AL",1101,36,229363,15.7
+AL,"Shelby County, AL",1117,28,195085,14.35
+AL,"Tuscaloosa County, AL",1125,31,194656,15.93
+AK,"Anchorage Borough, AK",2020,49,291826,16.79
+AZ,"Cochise County, AZ",4003,33,131346,25.12
+AZ,"Coconino County, AZ",4005,21,134421,15.62
+AZ,"Maricopa County, AZ",4013,497,3817117,13.02
+AZ,"Mohave County, AZ",4015,43,200186,21.48
+AZ,"Navajo County, AZ",4017,23,107449,21.41
+AZ,"Pima County, AZ",4019,164,980263,16.73
+AZ,"Pinal County, AZ",4021,49,375770,13.04
+AZ,"Yavapai County, AZ",4025,48,211033,22.75
+AR,"Benton County, AR",5007,24,221339,10.84
+AR,"Garland County, AR",5051,20,96024,20.83
+AR,"Pulaski County, AR",5119,65,382748,16.98
+CA,"Alameda County, CA",6001,158,1510271,10.46
+CA,"Butte County, CA",6007,25,220000,11.36
+CA,"Contra Costa County, CA",6013,104,1049025,9.91
+CA,"El Dorado County, CA",6017,22,181058,12.15
+CA,"Fresno County, CA",6019,68,930450,7.31
+CA,"Kern County, CA",6029,96,839631,11.43
+CA,"Los Angeles County, CA",6037,799,9818605,8.14
+CA,"Marin County, CA",6041,21,252409,8.32
+CA,"Merced County, CA",6047,27,255793,10.56
+CA,"Monterey County, CA",6053,50,415057,12.05
+CA,"Orange County, CA",6059,147,3010232,4.88
+CA,"Placer County, CA",6061,30,348432,8.61
+CA,"Riverside County, CA",6065,133,2189641,6.07
+CA,"Sacramento County, CA",6067,124,1418788,8.74
+CA,"San Bernardino County, CA",6071,183,2035210,8.99
+CA,"San Diego County, CA",6073,165,3095313,5.33
+CA,"San Francisco County, CA",6075,54,805235,6.71
+CA,"San Joaquin County, CA",6077,76,685306,11.09
+CA,"San Luis Obispo County, CA",6079,31,269637,11.5
+CA,"San Mateo County, CA",6081,40,718451,5.57
+CA,"Santa Barbara County, CA",6083,21,423895,4.95
+CA,"Santa Clara County, CA",6085,63,1781642,3.54
+CA,"Santa Cruz County, CA",6087,21,262382,8
+CA,"Shasta County, CA",6089,25,177223,14.11
+CA,"Solano County, CA",6095,45,413344,10.89
+CA,"Sonoma County, CA",6097,34,483878,7.03
+CA,"Stanislaus County, CA",6099,44,514453,8.55
+CA,"Tulare County, CA",6107,49,442179,11.08
+CA,"Ventura County, CA",6111,37,823318,4.49
+CO,"Adams County, CO",8001,27,441603,6.11
+CO,"Arapahoe County, CO",8005,59,572003,10.31
+CO,"Boulder County, CO",8013,28,294567,9.51
+CO,"Denver County, CO",8031,58,600158,9.66
+CO,"Douglas County, CO",8035,21,285465,7.36
+CO,"El Paso County, CO",8041,72,622263,11.57
+CO,"Jefferson County, CO",8059,56,534543,10.48
+CO,"Larimer County, CO",8069,29,299630,9.68
+CO,"Mesa County, CO",8077,23,146723,15.68
+CT,"Fairfield County, CT",9001,52,916829,5.67
+CT,"Hartford County, CT",9003,62,894014,6.94
+CT,"New Haven County, CT",9009,53,862477,6.15
+DE,"New Castle County, DE",10003,54,538479,10.03
+DE,"Sussex County, DE",10005,26,197145,13.19
+DC,"District of Columbia, DC",11001,99,601723,16.45
+FL,"Alachua County, FL",12001,34,247336,13.75
+FL,"Bay County, FL",12005,26,168852,15.4
+FL,"Brevard County, FL",12009,79,543376,14.54
+FL,"Broward County, FL",12011,171,1748066,9.78
+FL,"Charlotte County, FL",12015,21,159978,13.13
+FL,"Citrus County, FL",12017,26,141236,18.41
+FL,"Clay County, FL",12019,33,190865,17.29
+FL,"Collier County, FL",12021,34,321520,10.57
+FL,"Duval County, FL",12031,133,864263,15.39
+FL,"Escambia County, FL",12033,36,297619,12.1
+FL,"Hernando County, FL",12053,25,172778,14.47
+FL,"Hillsborough County, FL",12057,128,1229226,10.41
+FL,"Lake County, FL",12069,43,297052,14.48
+FL,"Lee County, FL",12071,67,618754,10.83
+FL,"Leon County, FL",12073,37,275487,13.43
+FL,"Manatee County, FL",12081,47,322833,14.56
+FL,"Marion County, FL",12083,50,331298,15.09
+FL,"Miami-Dade County, FL",12086,259,2496435,10.37
+FL,"Okaloosa County, FL",12091,23,180822,12.72
+FL,"Orange County, FL",12095,111,1145956,9.69
+FL,"Palm Beach County, FL",12099,158,1320134,11.97
+FL,"Pasco County, FL",12101,56,464697,12.05
+FL,"Pinellas County, FL",12103,126,916542,13.75
+FL,"Polk County, FL",12105,58,602095,9.63
+FL,"St. Johns County, FL",12109,27,190039,14.21
+FL,"St. Lucie County, FL",12111,35,277789,12.6
+FL,"Sarasota County, FL",12115,44,379448,11.6
+FL,"Seminole County, FL",12117,38,422718,8.99
+FL,"Volusia County, FL",12127,79,494593,15.97
+GA,"Bibb County, GA",13021,32,155547,20.57
+GA,"Chatham County, GA",13051,35,265128,13.2
+GA,"Clayton County, GA",13063,24,259424,9.25
+GA,"Cobb County, GA",13067,55,688078,7.99
+GA,"DeKalb County, GA",13089,101,691893,14.6
+GA,"Fulton County, GA",13121,143,920581,15.53
+GA,"Gwinnett County, GA",13135,66,805321,8.2
+GA,"Henry County, GA",13151,22,203922,10.79
+GA,"Houston County, GA",13153,21,139900,15.01
+GA,"Muscogee County, GA",13215,29,189885,15.27
+GA,"Richmond County, GA",13245,34,200549,16.95
+HI,"Honolulu County, HI",15003,27,953207,2.83
+ID,"Ada County, ID",16001,37,392365,9.43
+ID,"Kootenai County, ID",16055,21,138494,15.16
+IL,"Cook County, IL",17031,581,5194675,11.18
+IL,"DuPage County, IL",17043,39,916924,4.25
+IL,"Kane County, IL",17089,22,515269,4.27
+IL,"Lake County, IL",17097,39,703462,5.54
+IL,"McHenry County, IL",17111,20,308760,6.48
+IL,"St. Clair County, IL",17163,39,270056,14.44
+IL,"Sangamon County, IL",17167,23,197465,11.65
+IL,"Will County, IL",17197,37,677560,5.46
+IL,"Winnebago County, IL",17201,29,295266,9.82
+IN,"Allen County, IN",18003,40,355329,11.26
+IN,"Lake County, IN",18089,98,496005,19.76
+IN,"Marion County, IN",18097,147,903393,16.27
+IN,"St. Joseph County, IN",18141,27,266931,10.11
+IA,"Polk County, IA",19153,28,430640,6.5
+KS,"Johnson County, KS",20091,42,544179,7.72
+KS,"Sedgwick County, KS",20173,46,498365,9.23
+KS,"Shawnee County, KS",20177,29,177934,16.3
+KS,"Wyandotte County, KS",20209,25,157505,15.87
+KY,"Fayette County, KY",21067,29,295803,9.8
+KY,"Jefferson County, KY",21111,96,741096,12.95
+LA,"Caddo Parish, LA",22017,46,254969,18.04
+LA,"Calcasieu Parish, LA",22019,34,192768,17.64
+LA,"East Baton Rouge Parish, LA",22033,111,440171,25.22
+LA,"Jefferson Parish, LA",22051,99,432552,22.89
+LA,"Lafayette Parish, LA",22055,32,221578,14.44
+LA,"Livingston Parish, LA",22063,28,128026,21.87
+LA,"Orleans Parish, LA",22071,163,343829,47.41
+LA,"Ouachita Parish, LA",22073,28,153720,18.21
+LA,"St. Tammany Parish, LA",22103,28,233740,11.98
+MD,"Anne Arundel County, MD",24003,35,537656,6.51
+MD,"Baltimore County, MD",24005,59,805029,7.33
+MD,"Montgomery County, MD",24031,32,971777,3.29
+MD,"Prince George's County, MD",24033,111,863420,12.86
+MD,"Baltimore city, MD",24510,165,620961,26.57
+MA,"Bristol County, MA",25005,24,548285,4.38
+MA,"Essex County, MA",25009,24,743159,3.23
+MA,"Hampden County, MA",25013,26,463490,5.61
+MA,"Middlesex County, MA",25017,35,1503085,2.33
+MA,"Suffolk County, MA",25025,70,722023,9.69
+MA,"Worcester County, MA",25027,27,798552,3.38
+MI,"Calhoun County, MI",26025,20,136146,14.69
+MI,"Genesee County, MI",26049,78,425790,18.32
+MI,"Ingham County, MI",26065,22,280895,7.83
+MI,"Kalamazoo County, MI",26077,21,250331,8.39
+MI,"Kent County, MI",26081,25,602622,4.15
+MI,"Macomb County, MI",26099,73,840978,8.68
+MI,"Oakland County, MI",26125,86,1202362,7.15
+MI,"Saginaw County, MI",26145,22,200169,10.99
+MI,"Washtenaw County, MI",26161,21,344791,6.09
+MI,"Wayne County, MI",26163,366,1820584,20.1
+MN,"Dakota County, MN",27037,26,398552,6.52
+MN,"Hennepin County, MN",27053,78,1152425,6.77
+MN,"Ramsey County, MN",27123,24,508640,4.72
+MS,"DeSoto County, MS",28033,23,161252,14.26
+MS,"Harrison County, MS",28047,25,187105,13.36
+MS,"Hinds County, MS",28049,49,245285,19.98
+MO,"Clay County, MO",29047,29,221939,13.07
+MO,"Greene County, MO",29077,33,275174,11.99
+MO,"Jackson County, MO",29095,145,674158,21.51
+MO,"Jefferson County, MO",29099,25,218733,11.43
+MO,"St. Charles County, MO",29183,28,360485,7.77
+MO,"St. Louis County, MO",29189,123,998954,12.31
+MO,"St. Louis city, MO",29510,116,319294,36.33
+MT,"Flathead County, MT",30029,20,90928,22
+NE,"Douglas County, NE",31055,54,517110,10.44
+NV,"Clark County, NV",32003,275,1951269,14.09
+NV,"Washoe County, NV",32031,52,421407,12.34
+NH,"Hillsborough County, NH",33011,25,400721,6.24
+NH,"Rockingham County, NH",33015,28,295223,9.48
+NJ,"Atlantic County, NJ",34001,26,274549,9.47
+NJ,"Bergen County, NJ",34003,28,905116,3.09
+NJ,"Camden County, NJ",34007,46,513657,8.96
+NJ,"Essex County, NJ",34013,107,783969,13.65
+NJ,"Hudson County, NJ",34017,26,634266,4.1
+NJ,"Mercer County, NJ",34021,26,366513,7.09
+NJ,"Ocean County, NJ",34029,26,576567,4.51
+NJ,"Passaic County, NJ",34031,30,501226,5.99
+NJ,"Union County, NJ",34039,27,536499,5.03
+NM,"Bernalillo County, NM",35001,80,662564,12.07
+NM,"Dona Ana County, NM",35013,26,209233,12.43
+NM,"San Juan County, NM",35045,23,130044,17.69
+NY,"Bronx County, NY",36005,86,1385108,6.21
+NY,"Dutchess County, NY",36027,20,297488,6.72
+NY,"Erie County, NY",36029,76,919040,8.27
+NY,"Kings County, NY",36047,171,2504700,6.83
+NY,"Monroe County, NY",36055,61,744344,8.2
+NY,"Nassau County, NY",36059,46,1339532,3.43
+NY,"New York County, NY",36061,34,1585873,2.14
+NY,"Onondaga County, NY",36067,23,467026,4.92
+NY,"Queens County, NY",36081,81,2230722,3.63
+NY,"Suffolk County, NY",36103,69,1493350,4.62
+NY,"Westchester County, NY",36119,28,949113,2.95
+NC,"Buncombe County, NC",37021,31,238318,13.01
+NC,"Cabarrus County, NC",37025,20,178011,11.24
+NC,"Catawba County, NC",37035,24,154358,15.55
+NC,"Cumberland County, NC",37051,47,319431,14.71
+NC,"Davidson County, NC",37057,20,162878,12.28
+NC,"Durham County, NC",37063,29,267587,10.84
+NC,"Forsyth County, NC",37067,37,350670,10.55
+NC,"Gaston County, NC",37071,36,206086,17.47
+NC,"Guilford County, NC",37081,39,488406,7.99
+NC,"Harnett County, NC",37085,22,114678,19.18
+NC,"Johnston County, NC",37101,21,168878,12.44
+NC,"Mecklenburg County, NC",37119,101,919628,10.98
+NC,"Onslow County, NC",37133,26,177772,14.63
+NC,"Pitt County, NC",37147,20,168148,11.89
+NC,"Robeson County, NC",37155,33,134168,24.6
+NC,"Wake County, NC",37183,52,900993,5.77
+OH,"Butler County, OH",39017,27,368130,7.33
+OH,"Cuyahoga County, OH",39035,123,1280122,9.61
+OH,"Franklin County, OH",39049,175,1163414,15.04
+OH,"Hamilton County, OH",39061,107,802374,13.34
+OH,"Lucas County, OH",39095,51,441815,11.54
+OH,"Mahoning County, OH",39099,28,238823,11.72
+OH,"Montgomery County, OH",39113,78,535153,14.58
+OH,"Stark County, OH",39151,48,375586,12.78
+OH,"Summit County, OH",39153,44,541781,8.12
+OH,"Trumbull County, OH",39155,28,210312,13.31
+OK,"Cleveland County, OK",40027,33,255755,12.9
+OK,"Oklahoma County, OK",40109,98,718633,13.64
+OK,"Tulsa County, OK",40143,104,603403,17.24
+OR,"Clackamas County, OR",41005,36,375992,9.57
+OR,"Deschutes County, OR",41017,27,157733,17.12
+OR,"Jackson County, OR",41029,21,203206,10.33
+OR,"Lane County, OR",41039,45,351715,12.79
+OR,"Marion County, OR",41047,27,315335,8.56
+OR,"Multnomah County, OR",41051,65,735334,8.84
+OR,"Washington County, OR",41067,35,529710,6.61
+PA,"Allegheny County, PA",42003,135,1223348,11.04
+PA,"Beaver County, PA",42007,21,170539,12.31
+PA,"Berks County, PA",42011,42,411442,10.21
+PA,"Bucks County, PA",42017,43,625249,6.88
+PA,"Chester County, PA",42029,38,498886,7.62
+PA,"Dauphin County, PA",42043,27,268100,10.07
+PA,"Delaware County, PA",42045,56,558979,10.02
+PA,"Erie County, PA",42049,37,280566,13.19
+PA,"Lehigh County, PA",42077,30,349497,8.58
+PA,"Luzerne County, PA",42079,27,320918,8.41
+PA,"Montgomery County, PA",42091,48,799874,6
+PA,"Northampton County, PA",42095,27,297735,9.07
+PA,"Philadelphia County, PA",42101,296,1526006,19.4
+PA,"Westmoreland County, PA",42129,31,365169,8.49
+PA,"York County, PA",42133,47,434972,10.81
+RI,"Providence County, RI",44007,31,626667,4.95
+SC,"Aiken County, SC",45003,28,160099,17.49
+SC,"Anderson County, SC",45007,37,187126,19.77
+SC,"Berkeley County, SC",45015,21,177843,11.81
+SC,"Charleston County, SC",45019,63,350209,17.99
+SC,"Florence County, SC",45041,22,136885,16.07
+SC,"Greenville County, SC",45045,53,451225,11.75
+SC,"Horry County, SC",45051,33,269291,12.25
+SC,"Lexington County, SC",45063,27,262391,10.29
+SC,"Richland County, SC",45079,51,384504,13.26
+SC,"Spartanburg County, SC",45083,45,284307,15.83
+SC,"York County, SC",45091,22,226073,9.73
+TN,"Anderson County, TN",47001,20,75129,26.62
+TN,"Davidson County, TN",47037,84,626681,13.4
+TN,"Hamilton County, TN",47065,36,336463,10.7
+TN,"Knox County, TN",47093,59,432226,13.65
+TN,"Montgomery County, TN",47125,22,172331,12.77
+TN,"Rutherford County, TN",47149,32,262604,12.19
+TN,"Shelby County, TN",47157,164,927644,17.68
+TN,"Washington County, TN",47179,20,122979,16.26
+TX,"Bell County, TX",48027,58,310235,18.7
+TX,"Bexar County, TX",48029,156,1714773,9.1
+TX,"Brazoria County, TX",48039,26,313166,8.3
+TX,"Collin County, TX",48085,46,782341,5.88
+TX,"Dallas County, TX",48113,280,2368139,11.82
+TX,"Denton County, TX",48121,50,662614,7.55
+TX,"El Paso County, TX",48141,38,800647,4.75
+TX,"Fort Bend County, TX",48157,45,585375,7.69
+TX,"Galveston County, TX",48167,29,291309,9.96
+TX,"Grayson County, TX",48181,22,120877,18.2
+TX,"Gregg County, TX",48183,26,121730,21.36
+TX,"Harris County, TX",48201,500,4092459,12.22
+TX,"Hidalgo County, TX",48215,39,774769,5.03
+TX,"Jefferson County, TX",48245,35,252273,13.87
+TX,"Johnson County, TX",48251,29,150934,19.21
+TX,"Lubbock County, TX",48303,27,278831,9.68
+TX,"McLennan County, TX",48309,22,234906,9.37
+TX,"Montgomery County, TX",48339,45,455746,9.87
+TX,"Nueces County, TX",48355,39,340223,11.46
+TX,"Smith County, TX",48423,28,209714,13.35
+TX,"Tarrant County, TX",48439,190,1809034,10.5
+TX,"Travis County, TX",48453,90,1024266,8.79
+TX,"Wichita County, TX",48485,20,131500,15.21
+TX,"Williamson County, TX",48491,30,422679,7.1
+UT,"Davis County, UT",49011,25,306479,8.16
+UT,"Salt Lake County, UT",49035,120,1029655,11.65
+UT,"Utah County, UT",49049,31,516564,6
+UT,"Washington County, UT",49053,22,138115,15.93
+UT,"Weber County, UT",49057,29,231236,12.54
+VA,"Chesterfield County, VA",51041,28,316236,8.85
+VA,"Fairfax County, VA",51059,51,1081726,4.71
+VA,"Henrico County, VA",51087,27,306935,8.8
+VA,"Prince William County, VA",51153,26,402002,6.47
+VA,"Chesapeake city, VA",51550,23,222209,10.35
+VA,"Hampton city, VA",51650,21,137436,15.28
+VA,"Newport News city, VA",51700,28,180719,15.49
+VA,"Norfolk city, VA",51710,41,242803,16.89
+VA,"Richmond city, VA",51760,41,204214,20.08
+VA,"Virginia Beach city, VA",51810,48,437994,10.96
+WA,"Clark County, WA",53011,38,425363,8.93
+WA,"King County, WA",53033,119,1931249,6.16
+WA,"Kitsap County, WA",53035,23,251133,9.16
+WA,"Pierce County, WA",53053,79,795225,9.93
+WA,"Snohomish County, WA",53061,60,713335,8.41
+WA,"Spokane County, WA",53063,44,471221,9.34
+WA,"Yakima County, WA",53077,36,243231,14.8
+WV,"Kanawha County, WV",54039,40,193063,20.72
+WI,"Dane County, WI",55025,21,488073,4.3
+WI,"Milwaukee County, WI",55079,126,947735,13.29
+WI,"Waukesha County, WI",55133,23,389891,5.9

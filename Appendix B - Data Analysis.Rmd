@@ -1,0 +1,256 @@
+---
+title: "Appendix B: Data Analysis"
+author: "Casey DeLano and Jimmy DeLano"
+date: "December 4, 2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+## Step 0. Read in Data
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(GGally)
+library(car)
+library(testit)
+library(corrplot)
+library(MASS)
+library(knitr)
+set.seed(123)
+```
+
+```{r}
+#read in data
+final <- read.csv("C:/Users/Casey DeLano/Desktop/STAT 346/final.csv")
+attach(final)
+```
+
+## Step 1. Data Exploration
+
+We have too many variables to realistically create a scatter plot matrix that we can interpret.  Instead, let's create a matrix of each variable's correlation with all of the other variables.  We'll highlight correlations that are above $0.5$ or below $-0.5$ so that we can easily locate potential issues.
+
+```{r fig.height=11, fig.width=8}
+subset = subset(final,select=-c(County, Population, Voter.Group.2008))
+ggcorr(subset, geom = "blank", label = TRUE, hjust = 0.75) +
+  geom_point(size = 10, aes(color = coefficient > 0, alpha = abs(coefficient) > 0.5)) +
+  scale_alpha_manual(values = c("TRUE" = 0.25, "FALSE" = 0)) +
+  guides(color = FALSE, alpha = FALSE)
+```
+
+This is a great way to visualize the colinearity.  Let's use the variance inflation factor analysis more robustly determine which, if any variables, should be omitted.
+
+```{r}
+vif0 = lm(Crude.Rate~., data=final) #regress on all variables 
+vif = update(vif0, .~.-County-Population, data=final)
+vif(vif)
+```
+
+Notice that five variables have VIF values over 10: *Bachelors.Or.Higher.Pct, Income.Per.Capita, Median.Household.Income, White.Pct,* and *Black.Pct*.  
+
+Notice that *Income.Per.Capita* and *Median.Household.Income* are very correlated.  Let's take a look at a plot of the two.
+
+```{r}
+cor(Income.Per.Capita,Median.Household.Income)
+plot(Income.Per.Capita~Median.Household.Income)
+abline(lm(Income.Per.Capita~Median.Household.Income))
+```
+
+The relationship between these variables is super linear.  Recall from the correlation matrix that *Median.Household.Income* better predicts *Crude.Rate*.  So let's omit *Income.Per.Capita* from future anlysis.
+
+```{r}
+cor(Median.Household.Income, Crude.Rate)
+cor(Income.Per.Capita, Crude.Rate)
+```
+
+Also from the correlation matrix, we notice that *White.Pct* and *Black.Pct* are also highly correlated.  Let's repeat the above process for these variables.
+
+```{r}
+cor(Black.Pct,White.Pct)
+plot(Black.Pct~White.Pct)
+abline(lm(Black.Pct~White.Pct))
+cor(Black.Pct, Crude.Rate)
+cor(White.Pct, Crude.Rate)
+```
+Since *Black.Pct* is more highly predictive of *Crude.Rate* than *White.Pct*, let's drop *White.Pct* from future analysis.
+
+Now let's re-run our VIF analysis without these two variables:
+```{r}
+vif2.0 = lm(Crude.Rate~., data=final) #regress on all variables 
+vif2 = update(vif2.0, .~.-County-Population-White.Pct-Income.Per.Capita, data=final)
+vif(vif2)
+```
+
+All of the VIF values are under 10, which is the "rule of thumb" cutoff; this solved the issue of *Bachelors.Or.Higher.Pct* because it was highly correlated with our income variables.  So now we can move on to regressions.
+
+## Step 2. Creating the Best Interpretive Model
+
+Let's work on creating the best model that is still simple enough to interpret.  We'll start by creating a basic linear model and using boxcox to see if we need to transform our response variable.
+
+```{r}
+full0 = lm(Crude.Rate~., data=final) #regress on all variables 
+full = update(full0, .~.-County-Population-White.Pct-Income.Per.Capita, data=final) #remove county (names of counties), population, and income per capita (since we're using median household income instead)
+boxcox(full)
+#locator(1)
+```
+
+The boxcox command suggests raising our response variable, *Crude.Rate* to the power 0.26.  Let's raise it to the power $\frac{1}{4}$ since this is still within the reccomended interval and the interpretation is a bit easier.  We'll just add the letter "T" to the end of our variable *Crude.Rate* to indicate that it's been transformed.  This transformation makes *Crude.Rate* much more normally distributed (compared to its right skewedness before).
+
+```{r}
+final$Crude.RateT = final$Crude.Rate^(1/4)
+hist(final$Crude.RateT)
+```
+
+Now we can create a basic linear model regressed on all our (remaining) variables.  We'll then use minimum BIC stepwise to find which predictor variables are most relevant.
+
+```{r}
+fullT0 = lm(Crude.RateT~.,data=final)
+fullT = update(fullT0, .~.-Crude.Rate-County-Population-White.Pct-Income.Per.Capita, data=final)
+
+stepfull = step(fullT,trace=0, k=log(nrow(final)))
+summary(stepfull)
+```
+
+## Step 3. Creating the Best Predictive Model
+
+Now let's move on to creating a model that is more complex but has better predictability.  We'll do this in JMP.  
+
+```{r}
+write.table(final, "C:/Users/Casey DeLano/Desktop/STAT 346/final_jmp.txt", sep="\t", row.names=F)
+```
+
+We use *Crude.Rate* as our *Y* variable and all of the predictor variables except for *County, Population, White.Pct,* and *Income.Per.Capita*.  We ran a model with all interactions and squared terms using forward stepwise minimum BIC.  The following is the model that resulted:
+
+```{r}
+knitr::include_graphics("summary1.png")
+knitr::include_graphics("parameter_estimates1.png")
+```
+
+We entered this model into R.
+
+```{r}
+jmp.model <- lm(Crude.Rate~Poverty.Rate*Black.Pct+Violent.Crimes.Per.1000+Without.Health.Insurance.Pct+Federal.Govt.Expenditure.Per.Person+Violent.Crimes.Per.1000*Foreign.Born.Pct+High.School.Or.Higher.Pct*High.School.Or.Higher.Pct+Gun.Law.Rank.2010+Population.Density*Population.Density+Foreign.Born.Pct+Median.Age+Gun.Law.Rank.2010*Federal.Govt.Expenditure.Per.Person+Black.Pct*Non.Violent.Crimes.Per.1000+Median.Household.Income*Foreign.Born.Pct+Without.Health.Insurance.Pct*Non.Violent.Crimes.Per.1000+High.School.Or.Higher.Pct*Federal.Govt.Expenditure.Per.Person+Unemployment.Rate*Black.Pct+Land.Area*Black.Pct+Voter.Group.2008+Bachelors.Or.Higher.Pct+Black.Pct+Without.Health.Insurance.Pct*Without.Health.Insurance.Pct+Black.Pct*Gun.Law.Rank.2010+Bachelors.Or.Higher.Pct*Bachelors.Or.Higher.Pct+Unemployment.Rate+Female.Pct+Land.Area+Median.Household.Income+Poverty.Rate+Non.Violent.Crimes.Per.1000+High.School.Or.Higher.Pct+Population.Density, data = final)
+```
+
+Similarly to what we did with our simpler model, let's see if we should transform *Crude.Rate* in this model:
+
+```{r}
+boxcox(jmp.model)
+#locator(1)
+```
+
+Very similarly to before, we get the reccomended transformation is raising *Crude.Rate* to the power $0.27$.  Let's stick to $\frac{1}{4}$ for the same reasons.  We re-ran the forward minimum BIC stepwise model in JMP in the exact same was as before except for using *Crude.RateT* as our *Y*.  The following is the model that resulted:
+
+```{r}
+knitr::include_graphics("crudeRateT_summary.png")
+knitr::include_graphics("crudeRateT_parameter_estimates.png")
+```
+
+Again, we wrote this model into R.
+
+```{r}
+jmp.modelT = lm(Crude.RateT~Foreign.Born.Pct+Without.Health.Insurance.Pct+Violent.Crimes.Per.1000*Foreign.Born.Pct+Black.Pct+Population.Density*Foreign.Born.Pct+Foreign.Born.Pct*Foreign.Born.Pct+Black.Pct*Gun.Law.Rank.2010+Gun.Law.Rank.2010+Unemployment.Rate*High.School.Or.Higher.Pct+Federal.Govt.Expenditure.Per.Person+Median.Age+Without.Health.Insurance.Pct*Hispanic.Pct+Gun.Law.Rank.2010*Federal.Govt.Expenditure.Per.Person+Poverty.Rate*Voter.Group.2008+Without.Health.Insurance.Pct*Non.Violent.Crimes.Per.1000+Female.Pct+Violent.Crimes.Per.1000+High.School.Or.Higher.Pct*Median.Household.Income+Female.Pct*Foreign.Born.Pct+Median.Household.Income*Voter.Group.2008+Median.Household.Income+High.School.Or.Higher.Pct*High.School.Or.Higher.Pct+Mixed.Race.Pct*Hispanic.Pct+Mixed.Race.Pct+Mixed.Race.Pct*Federal.Govt.Expenditure.Per.Person+Population.Density+Poverty.Rate+Unemployment.Rate+High.School.Or.Higher.Pct+Voter.Group.2008+Hispanic.Pct+Non.Violent.Crimes.Per.1000+High.School.Or.Higher.Pct*Without.Health.Insurance.Pct, data=final)
+```
+
+Let's quickly find the $R^2$ values for our two models.  (Note that the $R^2$ for the JMP model is different when we run it in *R* than when JMP created it.)
+
+```{r}
+summary(stepfull)$r.squared
+summary(jmp.modelT)$r.squared
+```
+
+## Step 4. Cross-Validation
+
+Now let's run a cross-validation for both of the models.  We'll create a test set that is 25% of our total data and a training set that is the remaining 75%.  We'll loop through this entire process 10 times so that we can take an average of the resulting SSE, $R^2$ and MSE for the training and test sets.
+
+```{r}
+#create empty vectors so we can add values in for loop
+results_simple = NULL
+results_complex = NULL
+
+for (i in 1:10){
+  #create training and test sets
+  smp_size_i <- floor(0.75 * nrow(final))
+  set.seed(i)
+  train_ind_i <- sample(seq_len(nrow(final)), size = smp_size_i)
+  train_i <- final[train_ind_i, ]
+  test_i <- final[-train_ind_i, ]
+  
+  #create models with training sets
+  lm_simple = lm(Crude.RateT~Median.Age+Unemployment.Rate+Violent.Crimes.Per.1000+High.School.Or.Higher.Pct+Without.Health.Insurance.Pct+Female.Pct+Black.Pct+Foreign.Born.Pct+Gun.Law.Rank.2010+Federal.Govt.Expenditure.Per.Person, data=train_i)
+  lm_complex = lm(Crude.RateT~Foreign.Born.Pct+Without.Health.Insurance.Pct+Violent.Crimes.Per.1000*Foreign.Born.Pct+Black.Pct+Population.Density*Foreign.Born.Pct+Foreign.Born.Pct*Foreign.Born.Pct+Black.Pct*Gun.Law.Rank.2010+Gun.Law.Rank.2010+Unemployment.Rate*High.School.Or.Higher.Pct+Federal.Govt.Expenditure.Per.Person+Median.Age+Without.Health.Insurance.Pct*Hispanic.Pct+Gun.Law.Rank.2010*Federal.Govt.Expenditure.Per.Person+Poverty.Rate*Voter.Group.2008+Without.Health.Insurance.Pct*Non.Violent.Crimes.Per.1000+Female.Pct+Violent.Crimes.Per.1000+High.School.Or.Higher.Pct*Median.Household.Income+Female.Pct*Foreign.Born.Pct+Median.Household.Income*Voter.Group.2008+Median.Household.Income+High.School.Or.Higher.Pct*High.School.Or.Higher.Pct+Mixed.Race.Pct*Hispanic.Pct+Mixed.Race.Pct+Mixed.Race.Pct*Federal.Govt.Expenditure.Per.Person+Population.Density+Poverty.Rate+Unemployment.Rate+High.School.Or.Higher.Pct+Voter.Group.2008+Hispanic.Pct+Non.Violent.Crimes.Per.1000+High.School.Or.Higher.Pct*Without.Health.Insurance.Pct, data=train_i)
+  
+  #predict the model on the test set
+  preds.simple = predict(lm_simple, test_i)
+  preds.complex = predict(lm_complex, test_i)
+  
+  #calculate SSE, R^2, and MSEs for simple
+  results_simple$sse[i] = sum((test_i$Crude.RateT-preds.simple)^2)
+  results_simple$r2[i] = cor(test_i$Crude.RateT, preds.simple)^2
+  results_simple$train.mse[i] = mean(lm_simple$residuals^2)
+  results_simple$test.mse[i] = results_simple$sse[i]/(nrow(test_i))
+  
+  #calculate SSE, R^2, and MSEs for complex
+  results_complex$sse[i] = sum((test_i$Crude.RateT-preds.complex)^2)
+  results_complex$r2[i] = cor(test_i$Crude.RateT, preds.complex)^2
+  results_complex$train.mse[i] = mean(lm_complex$residuals^2)
+  results_complex$test.mse[i] = results_complex$sse[i]/(nrow(test_i))
+  
+}
+
+#calculate means of sse, R^2, and mse and put into a table
+results_simple = data.frame(results_simple)
+results_complex = data.frame(results_complex)
+means_simple = apply(results_simple, 2, mean)
+means_complex = apply(results_complex, 2, mean)
+vector = cbind(means_simple,means_complex)
+kable(vector)
+```
+
+## Step 5. Diagnostics
+
+```{r}
+#simple model
+par(mfrow=c(1,2))
+plot(lm_simple,1) #residual plot
+plot(lm_simple,2) #normal plot
+par(mfrow=c(1,1))
+influencePlot(lm_simple) #influence plot
+
+#complex model
+par(mfrow=c(1,2))
+plot(lm_complex,1) #residual plot
+plot(lm_complex,2) #normal plot
+par(mfrow=c(1,1))
+influencePlot(lm_complex) #influence plot
+
+#rerun simple model without influential points
+final2_s = final[-c(130,256,163,18),]
+stepfull2 = lm(formula(stepfull), data=final2_s)
+summary(stepfull2)
+summary(stepfull)
+assert(sign(summary(stepfull2)$coef) == sign(summary(stepfull)$coef)) #assert the signs of the coefficients are the same for both models (with and without influential points)
+
+#rerun simple model without influential points
+final2_c = final[-c(130,78,276,203),]
+jmp.modelT2 = lm(formula(jmp.modelT), data=final2_c)
+summary(jmp.modelT2)
+summary(jmp.modelT)
+assert(sign(summary(jmp.modelT2)$coef) == sign(summary(jmp.modelT)$coef)) #assert the signs of the coefficients are the same for both models (with and without influential points)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
